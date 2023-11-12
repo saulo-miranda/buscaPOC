@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+{% block title %}Books{% endblock title %}
+{% block content %}
+
+    
+    <div class="element-list-container w-70">
+        <h3 class="display-3" style="text-align: center;">Resultados para "{{ query }}"</h3>
+        
+        {% for documento in documento_list %}
+                    
+        <div class="d-flex  justify-content-center">
+            <a href="{{ documento.arquivo_pdf }}" class="list-group-item "  style="width: 60%" target="_blank" id="documento">
+                <div>
+                    <h5 class="mb-1">{{ documento.titulo }}</h5>
+                    <small class="text-muted">{{ documento.autor }}</small><br>
+                    <small class="text-muted my-4">{{ documento.instituicao }}</small>
+                </div>
+            </a>
+        </div>
+
+            {% endfor %}
+        
+    </div>
+{% endblock content %}

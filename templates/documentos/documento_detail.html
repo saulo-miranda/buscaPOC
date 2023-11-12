@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="article-entry">
+        <h2>{{ object.titulo }}</h2>
+        <p>by {{ object.autor }} | {{ object.instituicao }}</p>
+    </div>
+    <p><a href="{% url 'documento_edit' documento.pk %}">Edit</a> |
+    <a href="{% url 'documento_delete' documento.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'documento_list' %}">All Articles</a>.</p>
+    {% else %}
+    <div class="container">
+        <h3 class="display-3" style="text-align: center;">Acesso Negado</h3>
+        <h5 class="display-5" style="text-align: center;">Entre em sua conta ou cadastre-se</h4>
+    </div>
+    {% endif %}
+{% endblock content %}

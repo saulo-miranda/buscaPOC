@@ -1,0 +1,54 @@
+{% extends "_base.html" %}
+{% block title %}Books{% endblock title %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <div class="container">
+        <h3 class="display-3" style="text-align: center;">Gerenciar Coleção</h3>
+        {% for documento in documento_list %}
+        
+        <div style="display:flex; justify-content:center;">
+
+            
+            <div style="display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: 70%;">
+                <div style="flex: 1;
+                padding-right: 10px;">
+                    <a href="{{ documento.arquivo_pdf }}" class=" " target="_blank" id="documento">
+                        <div class="">
+                            <h5 class="mb-1">{{ documento.titulo }}</h5>
+                            <small class="text-muted">{{ documento.instituicao }}</small><br>
+                            <small class="text-muted my-4">{{ documento.autor }}</small>
+                        </div>
+                    </a>
+                </div>
+                <div style="display: flex;
+                flex-direction: column;
+                justify-content: flex-start;">
+                    <a href="{% url 'documento_delete' documento.pk %}" class="btn btn-danger" style="padding: 10px;
+                    margin-bottom: 5px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;">Apagar</a>
+                    <a href="{% url 'documento_edit' documento.pk %}" class="btn btn-success" style="padding: 10px;
+                    margin-bottom: 5px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;">Editar</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="container">
+        <h3 class="display-3" style="text-align: center;">Acesso Negado</h3>
+        <h5 class="display-5" style="text-align: center;">Entre em sua conta ou cadastre-se</h4>
+    </div>
+    {% endif %}
+{% endblock content %}

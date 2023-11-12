@@ -1,0 +1,42 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    
+
+    <div class="container mt-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                <div class="card px-5 py-5" id="form1">
+                    <div class="form-data" >
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h1 class="display-3" style="text-align: center;">Cadastro de POC</h1>
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Título</label>
+                              <input  name="titulo" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Autores</label>
+                                <input  name="autor" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <div  class="form-text">Separe os nomes dos autores com ",", por exemplo: J Von Neumann, O Morgenstern</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Palavras-Chave</label>
+                                <input  name="instituicao" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <div  class="form-text">Separe as palavras-chave com ",", por exemplo: Roteamento, Redes Neurais, eBPF</div>
+                            </div>
+                            <div style="padding-bottom: 30px;">
+                                <label for="formFileLg" class="form-label">Arquivo</label>
+                                <input name="arquivo_pdf" class="form-control form-control-lg" id="formFileLg" type="file">
+                                <div  class="form-text">Selecione o arquivo PDF do POC</div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100" >Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock content %}

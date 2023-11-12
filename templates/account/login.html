@@ -1,0 +1,42 @@
+{% extends "_base.html" %}
+
+{% block title %}Log In{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-7">
+                <div class="card px-5 py-5" id="form1" style="border-radius: 3%; border-color: black;">
+                    <h3 class="display-3" style="text-align: center;">Entrar</h3>
+                    <div class="form-data" >
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div style="display: flex; justify-content: center; padding-top: 10px;">
+                                <p>
+                                    {% if field.errors %}
+                                    <ul class="errorlist">
+                                        {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    <label for="nome">{{ field.label_tag }} </label><br>                              
+                                    {{ field }}
+                                </p>
+                            </div>
+                        {% endfor %}
+                        <div style="display: flex; justify-content: center; padding-top: 10px;">
+                            <button class="btn btn-success" type="submit">Entrar</button>
+                        </div>
+                        </form>
+                    </div>
+                    <div style="display: flex; justify-content: center; padding-top: 10px;">
+                        <p>Não tem uma conta? <a href="{% url 'account_signup' %}">Cadastre-se</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

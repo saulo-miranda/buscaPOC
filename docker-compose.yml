@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports: 
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes: 
+      - .:/code
+    depends_on:
+      - db
+    environment:
+      - "DJANGO_DEBUG=True"
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=admin@gmail.com"
+      - "PGADMIN_DEFAULT_PASSWORD=admin123"
+
+
+volumes:
+  postgres_data:

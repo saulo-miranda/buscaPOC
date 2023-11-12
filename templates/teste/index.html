@@ -1,0 +1,105 @@
+{% extends "_base.html" %}
+
+{% block title %}Testes{% endblock title %}
+
+{% block content %}
+<style>
+    .column-layout {
+      column-count: 2; /* Define o número de colunas */
+      column-gap: 20px; /* Define o espaçamento entre as colunas */
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/popular-banco/',
+            success: function(data) {
+                $("#message").text(data.message);
+                $("#progress").attr("value", data.progress);
+            }
+        });
+    });
+</script>
+
+    <div class="container mt-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                
+                <div class="card px-5 py-5" id="form1">
+                    <h1 class="display-3" style="text-align: center;">Testes</h1>
+                    <div class="row justify-content-center">
+                        <h4>Popular banco para teste:  
+                            <a href="{% url 'popular_banco' %}">
+                                <button class="btn btn-primary" style="width:fit-content" disabled="true">Popular</button>
+                            </a>
+                        </h4>
+                        <div id="message"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h4> Parâmetros para teste
+                        </h4>
+                    </div>
+                    <hr>
+                    <div class="column-layout">
+                        <div class="row justify-content-center">
+                            <h4> Stemming</h4>
+                            <div>
+                                <div >
+                                    <input class="form-check-input" type="checkbox" id="savoy" name="savoy" >
+                                    <label class="form-check-label" for="mySwitch" style="padding-left: 10px;"> Savoy </label>
+                                </div>
+                                
+                                <div>
+                                    <input class="form-check-input" type="checkbox" id="rslp" name="rslp" >
+                                    <label class="form-check-label" for="mySwitch" style="padding-left: 10px;"> RSLP </label>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row justify-content-center">
+                            <h4> Busca </h4>
+                            <div>
+                                <div >
+                                    <input class="form-check-input" type="checkbox" id="bm25okapi" name="bm25okapi" >
+                                    <label class="form-check-label" for="mySwitch" style="padding-left: 10px;"> BM25 OKAPI </label>
+                                </div>
+                                
+                                <div>
+                                    <input class="form-check-input" type="checkbox" id="bm25l" name="bm25l" >
+                                    <label class="form-check-label" for="mySwitch" style="padding-left: 10px;"> BM25L </label>
+                                </div>
+                                <div>
+                                    <input class="form-check-input" type="checkbox" id="bm25plus" name="bm25plus" >
+                                    <label class="form-check-label" for="mySwitch" style="padding-left: 10px;"> BM25+ </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Adicione mais divs conforme necessário -->
+                      </div>
+                    
+                    <hr>
+                    <div style="display: flex;" class="row justify-content-center">
+
+                            <a >
+                                <button href="{% url 'teste_busca' %}" class="btn btn-primary" style="width:fit-content" id="button-teste">Teste de busca</button>
+                            </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("button-teste").addEventListener("click", function() {
+            var savoy = document.querySelector('#savoy');
+            var rslp = document.querySelector('#rslp');
+            var bm25okapi = document.querySelector('#bm25okapi');
+            var bm25l = document.querySelector('#bm25l');
+            var urlBusca = "{% url 'teste_busca' %}?rslp=" + encodeURIComponent(rslp.checked)
+            + "&savoy=" + encodeURIComponent(savoy.checked)
+            + "&bm25okapi=" + encodeURIComponent(bm25okapi.checked)
+            + "&bm25l=" + encodeURIComponent(bm25l.checked)
+            + "&bm25plus=" + encodeURIComponent(bm25plus.checked);
+            window.location.href = urlBusca;
+        });
+    </script>
+{% endblock content %}

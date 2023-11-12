@@ -1,0 +1,26 @@
+{% extends "_base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Log Out{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-7">
+                <div class="card px-5 py-5" id="form1" style=" border-color: black;">
+                    <h3 class="display-3" style="text-align: center;">Deseja sair?</h3>
+                    <div class="form-data" >
+                        <form method="post" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div style="display: flex; justify-content: center; padding-top: 10px;">
+                                <button class="btn btn-danger" type="submit">Sair</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

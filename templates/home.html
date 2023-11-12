@@ -1,0 +1,25 @@
+<!-- templates/home.html -->
+{% extends "_base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+    
+    <h1 class="display-3" style="text-align: center; padding-top: 10%;">Busca de POC</h1>
+    <div class="input-group mb-3 container " style="padding-top: 10%;">
+        <input  id="termo-busca" type="text" class="form-control" placeholder="Busque por título, autor, instituição" aria-label="Example text with button addon" aria-describedby="button-addon1">
+        <button class="btn btn-dark" type="button" id="button-addon1">Buscar</button>
+    </div>
+    <div class="form-check form-switch " style="display:flex; justify-content: center;">
+        <input class="form-check-input" type="checkbox" id="buscaEmConteudo" name="buscaEmConteudo" >
+        <label class="form-check-label" for="mySwitch" style="padding-left: 10px;"> Busca Avançada</label>
+    </div> 
+    <script>
+        document.getElementById("button-addon1").addEventListener("click", function() {
+            var termoBusca = document.getElementById("termo-busca").value;
+            var buscaEmConteudo = document.querySelector('#buscaEmConteudo');
+            var urlBusca = "{% url 'buscar' %}?q=" + encodeURIComponent(termoBusca) + "&c=" + encodeURIComponent(buscaEmConteudo.checked);
+            window.location.href = urlBusca;
+        });
+    </script>
+{% endblock content %}
