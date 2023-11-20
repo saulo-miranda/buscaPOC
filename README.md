@@ -1,5 +1,5 @@
 
-# BuscaPOC
+# BuscaTCC
 
 Sistema desenvolvido em meu projeto orientado em computação na UFV.
 
